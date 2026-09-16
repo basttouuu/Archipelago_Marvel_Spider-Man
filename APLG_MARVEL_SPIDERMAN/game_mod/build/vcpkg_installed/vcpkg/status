@@ -1,0 +1,77 @@
+Package: vcpkg-cmake-config
+Version: 2026-07-21
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 1525d5aff3a1be521f778ad8f1f0449cb7c2c179224edbad8a169c7f47182240
+Status: install ok installed
+
+Package: vcpkg-cmake
+Version: 2025-08-07
+Architecture: x64-windows
+Multi-Arch: same
+Abi: cfa0b179ac408c48b7d2c7bb445c3b8b1865c90601e8563478fd576f492e174e
+Status: install ok installed
+
+Package: mbedtls
+Version: 3.6.5
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: da60bdab35e0f5e4095b37ca736ce1fffd68218fa2b77c1cc19c407695320eed
+Description: An open source, portable, easy to use, readable and flexible SSL library
+Status: install ok installed
+
+Package: zlib
+Version: 1.3.2
+Port-Version: 2
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 88e65d194d1363b1fb4a46a948e4ae6bf7da837d6832aab427fed58a170db8c3
+Description: A compression library
+Status: install ok installed
+
+Package: ixwebsocket
+Version: 12.0.1
+Depends: vcpkg-cmake, vcpkg-cmake-config, zlib
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 5ba72c22f89940674071ddcdb4626e39db18517e99160f6144f6baabc4e028a5
+Description: Lightweight WebSocket Client and Server + HTTP Client and Server
+Default-Features: ssl
+Status: install ok installed
+
+Package: ixwebsocket
+Feature: mbedtls
+Depends: mbedtls
+Architecture: x64-windows
+Multi-Arch: same
+Description: SSL support (mbedTLS)
+Status: install ok installed
+
+Package: ixwebsocket
+Feature: ssl
+Architecture: x64-windows
+Multi-Arch: same
+Description: Default SSL backend
+Status: install ok installed
+
+Package: minhook
+Version: 1.3.4
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 102436c07ff31659e44c00e4598aed41adce43079dff39585a8cecbaaa796c81
+Description: The Minimalistic x86/x64 API Hooking Library for Windows.
+Status: install ok installed
+
+Package: nlohmann-json
+Version: 3.12.0
+Port-Version: 2
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 78fbf82e34c51eed3786d79ad9fb0c1495c872d02b697e6198bd61c88e7b9947
+Description: JSON for Modern C++
+Status: install ok installed
+

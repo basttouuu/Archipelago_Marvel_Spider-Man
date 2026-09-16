@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\hugop\Documents\private\Archipelago\SP\APLG_MARVEL_SPIDERMAN\game_mod\build\CMakeFiles\576af622502d9c573436d92724d9f5ad\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{68B03CB0-F834-3899-B5D8-3ED1102C546D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

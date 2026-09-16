@@ -1,0 +1,3 @@
+C:/Users/hugop/Documents/private/Archipelago/SP/APLG_MARVEL_SPIDERMAN/game_mod/build/CMakeFiles/dxgi.dir
+C:/Users/hugop/Documents/private/Archipelago/SP/APLG_MARVEL_SPIDERMAN/game_mod/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/hugop/Documents/private/Archipelago/SP/APLG_MARVEL_SPIDERMAN/game_mod/build/CMakeFiles/ZERO_CHECK.dir
