@@ -1,0 +1,15 @@
+# =============================================================================
+#  APLG_MARVEL_SPIDERMAN -- fichiers non versionnes
+#  (complete le .gitignore de la racine)
+# =============================================================================
+
+# --- Build du mod C++ ---------------------------------------------------------
+# Tout game_mod/build/ est genere par CMake + vcpkg : jamais versionne.
+game_mod/build/
+
+# --- Bytecode Python de l'apworld ---------------------------------------------
+apworld/**/__pycache__/
+
+# --- Sorties de packaging -----------------------------------------------------
+*.apworld
+dist/

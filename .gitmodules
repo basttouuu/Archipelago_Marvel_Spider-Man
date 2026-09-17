@@ -1,0 +1,19 @@
+# =============================================================================
+#  Sous-modules du projet
+#  Apres un clone :  git submodule update --init
+# =============================================================================
+#
+# ignore = untracked : le contenu non suivi de ces deux dossiers (venv,
+# output\, Players\, la jonction worlds\spiderman creee par generate.ps1,
+# le bootstrap de vcpkg) ne doit PAS faire apparaitre le depot parent comme
+# modifie. Un deplacement du commit pointe reste visible, lui.
+
+[submodule "archipelago_core"]
+	path = archipelago_core
+	url = https://github.com/ArchipelagoMW/Archipelago.git
+	ignore = untracked
+
+[submodule "APLG_MARVEL_SPIDERMAN/game_mod/vcpkg"]
+	path = APLG_MARVEL_SPIDERMAN/game_mod/vcpkg
+	url = https://github.com/microsoft/vcpkg.git
+	ignore = untracked

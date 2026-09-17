@@ -117,7 +117,25 @@ Write-Host "[4/4] Generation de la seed via Archipelago Generate.py..." -Foregro
 $timeBefore = Get-Date
 
 # Lancement de Generate.py avec redirection d'entree pour ne pas bloquer sur 'Press enter to close'
+#
+# Generate.py ecrit des avertissements sur stderr (deprecation de pkg_resources,
+# par exemple). Avec $ErrorActionPreference = "Stop", PowerShell 5.1 transforme
+# chaque ligne de stderr d'un programme natif en erreur TERMINANTE : le script
+# s'arretait ici meme quand la generation reussissait. On neutralise le temps de
+# l'appel, puis on lit le vrai code de retour.
+$previousEAP = $ErrorActionPreference
+$ErrorActionPreference = "Continue"
 cmd /c "echo. | `"$pythonExe`" `"$coreDir\Generate.py`" --player_files_path `"$playersDir`""
+$generateExit = $LASTEXITCODE
+$ErrorActionPreference = $previousEAP
+
+if ($generateExit -ne 0) {
+    Write-Host ""
+    Write-Host "      [ERREUR] Generate.py s'est termine en erreur (code $generateExit)." -ForegroundColor Red
+    Write-Host "      Lisez les messages ci-dessus pour la cause exacte." -ForegroundColor Gray
+    Write-Host ""
+    exit 1
+}
 
 $newZips = Get-ChildItem -Path "$outputDir\*.zip" -ErrorAction SilentlyContinue |
            Where-Object { $_.LastWriteTime -ge $timeBefore } |

@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "C:/Users/hugop/Documents/private/Archipelago/SP/APLG_MARVEL_SPIDERMAN/game_mod"
+    "cmake.sourceDirectory": "${workspaceFolder}/APLG_MARVEL_SPIDERMAN/game_mod",
+    "cmake.buildDirectory": "${workspaceFolder}/APLG_MARVEL_SPIDERMAN/game_mod/build"
 }

@@ -22,6 +22,10 @@ $rootDir      = if ($PSScriptRoot) { $PSScriptRoot } else { (Get-Location).Path 
 $coreDir      = Join-Path $rootDir "archipelago_core"
 $pythonExe    = Join-Path $coreDir "venv\Scripts\python.exe"
 $outputDir    = Join-Path $coreDir "output"
+# Le client doit tourner DEPUIS archipelago_core\ pour que 'from CommonClient import ...'
+# se resolve. On copie donc la source a chaque lancement (voir ETAPE 3).
+$clientSrc    = Join-Path $rootDir "APLG_MARVEL_SPIDERMAN\client\SpidermanClient.py"
+$clientDst    = Join-Path $coreDir "SpidermanClient.py"
 $apServerPort = 38281   # Port du serveur Archipelago (defaut : 38281)
 $ipcPort      = 51234   # Port WebSocket local DLL <-> Client (defaut : 51234)
 $maxWaitSecs  = 15      # Secondes max a attendre que le serveur demarre
@@ -51,6 +55,26 @@ if (-not (Test-Path $pythonExe)) {
     exit 1
 }
 Write-Host "      [OK] Python venv : $pythonExe" -ForegroundColor Green
+
+# Verifie tout de suite ce dont l'ETAPE 3 aura besoin : echouer ici evite de
+# laisser une fenetre MultiServer orpheline derriere nous.
+if (-not (Test-Path $clientSrc)) {
+    Write-Host "      [ERREUR] Client introuvable : $clientSrc" -ForegroundColor Red
+    Write-Host "               Verifiez que le depot est complet." -ForegroundColor Gray
+    exit 1
+}
+Write-Host "      [OK] Source du client : $clientSrc" -ForegroundColor Green
+
+# aiohttp n'est pas une dependance d'Archipelago : sans lui le client meurt sur
+# un ImportError dans une fenetre separee, ce qui est difficile a diagnostiquer.
+& $pythonExe -c "import aiohttp" 2>$null
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "      [ERREUR] aiohttp manquant dans le venv Archipelago." -ForegroundColor Red
+    Write-Host "               Installez-le avec :" -ForegroundColor Gray
+    Write-Host "                 & '$pythonExe' -m pip install aiohttp" -ForegroundColor Gray
+    exit 1
+}
+Write-Host "      [OK] aiohttp present dans le venv" -ForegroundColor Green
 
 
 # ---------------------------------------------------------------------------
@@ -120,6 +144,14 @@ if ($portOpen) {
 # ---------------------------------------------------------------------------
 Write-Host ""
 Write-Host "[3/3] Demarrage du SpidermanClient (IPC port $ipcPort)..." -ForegroundColor Cyan
+
+# Le client importe CommonClient depuis le core Archipelago : il doit donc etre
+# execute depuis $coreDir, sinon l'import echoue. On synchronise la copie a
+# chaque lancement pour que les modifications de client\SpidermanClient.py
+# soient toujours prises en compte.
+Copy-Item -Path $clientSrc -Destination $clientDst -Force
+Write-Host "      [OK] Client synchronise vers $clientDst" -ForegroundColor Green
+Write-Host "           (relancez ce script apres toute modification du client)" -ForegroundColor Gray
 
 $clientCmd = "cd '$coreDir'; & '$pythonExe' SpidermanClient.py"
 Start-Process powershell -ArgumentList "-NoExit", "-Command", $clientCmd

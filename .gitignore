@@ -1,0 +1,41 @@
+# =============================================================================
+#  Archipelago Marvel's Spider-Man -- fichiers non versionnes
+# =============================================================================
+
+# --- Environnement Archipelago -----------------------------------------------
+# archipelago_core/ et game_mod/vcpkg/ sont des sous-modules (voir .gitmodules).
+# Leur contenu non suivi (venv, output\, Players\, jonction worlds\spiderman,
+# bootstrap vcpkg) est neutralise par "ignore = untracked" dans .gitmodules :
+# inutile de le lister ici, git ne descend pas dans un sous-module.
+
+# --- Python ------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# --- Build C++ / CMake / vcpkg ------------------------------------------------
+build/
+out/
+vcpkg_installed/
+*.obj
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.tlog
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# --- Artefacts de seed --------------------------------------------------------
+*.apworld
+*.archipelago
+*.multidata
+
+# --- OS / editeurs ------------------------------------------------------------
+Thumbs.db
+desktop.ini
+.DS_Store
