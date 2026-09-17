@@ -1,0 +1,23 @@
+# =============================================================================
+#  Marvel's Spider-Man Remastered -- Fichier de configuration joueur (Solo)
+# =============================================================================
+
+name: SpideyPlayer
+game: Marvel's Spider-Man Remastered
+description: Profil solo pour Marvel's Spider-Man Remastered Archipelago
+
+Marvel's Spider-Man Remastered:
+  # Progression balancing : ajuste la distribution des items importants
+  progression_balancing: 50
+
+  # Objectif de victoire :
+  #   defeat_doc_ock     : Battre le Docteur Octopus (fin campagne principale)
+  #   all_main_missions  : Finir toutes les missions principales
+  goal: defeat_doc_ock
+
+  # Emplacements de checks a inclure :
+  include_backpacks: true        # 55 sacs a dos
+  include_pigeons: true          # 12 pigeons d'Howard
+  include_taskmaster: true       # 16 defis Taskmaster
+  include_oscorp_stations: true  # 17 stations de recherche Oscorp
+  include_bases: true            # 16 bases ennemies (Fisk, Demons, Sable, Prisonniers)

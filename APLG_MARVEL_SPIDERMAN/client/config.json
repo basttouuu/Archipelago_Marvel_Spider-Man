@@ -1,0 +1,6 @@
+{
+  "ap_server": "localhost:38281",
+  "ipc_port": 51234,
+  "player_name": "SpideyPlayer",
+  "log_level": "INFO"
+}

@@ -1,34 +1,48 @@
 from BaseClasses import Item, ItemClassification
 from typing import Dict, NamedTuple
-
-SPIDERMAN_BASE_ID = 8900000
+from .constants import SPIDERMAN_BASE_ID, GAME_NAME
 
 class SpiderManItemData(NamedTuple):
     code: int
     classification: ItemClassification
 
 class SpiderManItem(Item):
-    game: str = "Marvel's Spider-Man Remastered"
+    game: str = GAME_NAME
 
 ITEM_TABLE: Dict[str, SpiderManItemData] = {
-    # Gadgets de base & avancés
-    "Web Shooter": SpiderManItemData(SPIDERMAN_BASE_ID + 1, ItemClassification.progression),
-    "Impact Web": SpiderManItemData(SPIDERMAN_BASE_ID + 2, ItemClassification.progression),
-    "Spider-Drone": SpiderManItemData(SPIDERMAN_BASE_ID + 3, ItemClassification.progression),
-    "Electric Web": SpiderManItemData(SPIDERMAN_BASE_ID + 4, ItemClassification.progression),
-    "Web Bomb": SpiderManItemData(SPIDERMAN_BASE_ID + 5, ItemClassification.progression),
-    "Trip Mine": SpiderManItemData(SPIDERMAN_BASE_ID + 6, ItemClassification.useful),
-    "Concussive Blast": SpiderManItemData(SPIDERMAN_BASE_ID + 7, ItemClassification.progression),
-    "Suspension Matrix": SpiderManItemData(SPIDERMAN_BASE_ID + 8, ItemClassification.useful),
+    # -----------------------------------------------------------------------
+    # CLASSIFICATION : progression vs useful
+    # -----------------------------------------------------------------------
+    # progression = la DLL bloque l'item via HasSkill hook ET il est requis
+    #               par au moins une règle de logique (rules.py) ou un combat
+    #               spécifique qui le nécessite stratégiquement.
+    # useful      = la DLL bloque l'item, mais le jeu PEUT être terminé sans.
+    #               Améliore significativement l'expérience mais non critique.
+    # filler      = Tokens : aucun effet gameplay, servent de "padding" de pool.
+    # -----------------------------------------------------------------------
+
+    # Gadgets — requis par rules.py ou nécessaires pour des combats spécifiques
+    "Web Shooter":       SpiderManItemData(SPIDERMAN_BASE_ID + 1, ItemClassification.progression),
+    "Impact Web":        SpiderManItemData(SPIDERMAN_BASE_ID + 2, ItemClassification.progression),
+    "Spider-Drone":      SpiderManItemData(SPIDERMAN_BASE_ID + 3, ItemClassification.progression),
+    "Electric Web":      SpiderManItemData(SPIDERMAN_BASE_ID + 4, ItemClassification.progression),
+    "Web Bomb":          SpiderManItemData(SPIDERMAN_BASE_ID + 5, ItemClassification.progression),
+    # Trip Mine : passage en progression — pièges requis pour vider certaines
+    # Fisk Hideouts et Demon Warehouses efficacement (bloqué par HasSkill hook)
+    "Trip Mine":         SpiderManItemData(SPIDERMAN_BASE_ID + 6, ItemClassification.progression),
+    "Concussive Blast":  SpiderManItemData(SPIDERMAN_BASE_ID + 7, ItemClassification.progression),
+    # Suspension Matrix : passage en progression — nécessaire pour certains
+    # enchaînements de combat Demon/Sable qui requièrent de ralentir le temps
+    "Suspension Matrix": SpiderManItemData(SPIDERMAN_BASE_ID + 8, ItemClassification.progression),
 
     # Capacités & Mobilité
     "Skill: Web Zip": SpiderManItemData(SPIDERMAN_BASE_ID + 20, ItemClassification.progression),
     "Skill: Point Launch Boost": SpiderManItemData(SPIDERMAN_BASE_ID + 21, ItemClassification.progression),
     "Skill: Quick Zip": SpiderManItemData(SPIDERMAN_BASE_ID + 22, ItemClassification.progression),
     "Skill: Charge Jump": SpiderManItemData(SPIDERMAN_BASE_ID + 23, ItemClassification.progression),
-    "Skill: Air Dash": SpiderManItemData(SPIDERMAN_BASE_ID + 24, ItemClassification.progression),
-    "Skill: Web Throw": SpiderManItemData(SPIDERMAN_BASE_ID + 25, ItemClassification.useful),
-    "Skill: Perfect Dodge": SpiderManItemData(SPIDERMAN_BASE_ID + 26, ItemClassification.useful),
+    # Skill: Web Throw requis par rules.py (Boss: Rhino & Scorpion) -> progression obligatoire
+    "Skill: Web Throw":          SpiderManItemData(SPIDERMAN_BASE_ID + 25, ItemClassification.progression),
+    "Skill: Perfect Dodge":      SpiderManItemData(SPIDERMAN_BASE_ID + 26, ItemClassification.useful),
 
     # Clés d'accès & Déblocages de Quartiers
     "Surveillance Decryptor - Financial District": SpiderManItemData(SPIDERMAN_BASE_ID + 40, ItemClassification.progression),

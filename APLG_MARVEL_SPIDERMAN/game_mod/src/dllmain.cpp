@@ -1,4 +1,4 @@
-﻿#include <windows.h>
+#include <windows.h>
 #include <iostream>
 #include "proxy_dxgi.h"
 #include "network.h"
@@ -17,9 +17,10 @@ DWORD WINAPI ModMainThread(LPVOID) {
     std::cout << "=====================================================" << std::endl;
 
     GameHooks::Install();
+    // Connexion vers le client Python (port configurable via Network::DEFAULT_IPC_PORT)
     Network::Start([](int64_t itemId) {
         GameHooks::ApplyItem(itemId);
-    });
+    }, Network::DEFAULT_IPC_PORT);
 
     return 0;
 }
